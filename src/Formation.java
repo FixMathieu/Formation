@@ -2,6 +2,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+/*@author Mathieu-FIX - 2022
+ * @since 1.0
+*/
 public class Formation {
 	protected static Map <Integer,ArrayList<String>> formation = new HashMap<>();
 	protected static Map <Integer,ArrayList<String>> pannier = new HashMap<>();
@@ -23,7 +26,9 @@ public class Formation {
 		name = scan.next().toUpperCase();
 		
 	}
-	// Méthode pour Afficher les différentes formations
+	/** displayFormations
+	 * @param formation permet d'afficher la liste des formations
+	 * */
 	public static void displayFormations() {
 		System.out.println("         Bonjour et bienvenue dans mon application FullTrainings");
 		System.out.println("Nous allons vous proposer une liste de formation actuellement disponible");
@@ -35,7 +40,9 @@ public class Formation {
 		.forEach(e -> System.out.printf("%-14s | %-8s | %-36s | %-4s |\n",e.getValue().get(0),e.getValue().get(1),e.getValue().get(2),e.getValue().get(3)));	
 		System.out.println("-------------------------------------------------------------------------");
 	}
-	//Méthode pour voir les formations
+	/**seeFormations
+	 * */
+	
 	public static void seeFormations() {
 		System.out.println(" Liste de formation actuellement disponible");
 		System.out.println("--------------------------------------------------------------------------------");
@@ -47,7 +54,9 @@ public class Formation {
 		System.out.println("--------------------------------------------------------------------------------");
 		System.out.println(" ");
 	}
-	// Méthode pour Afficher les futur formations
+	/** futurFormations
+	 * @param futurFormation permet d'afficher les futures formations
+	 * */
 	public static void futurFormations() {
 		
 		System.out.println("          Liste des formations bientôt disponible ");
@@ -60,7 +69,9 @@ public class Formation {
 		System.out.println("-------------------------------------------------------------------------");
 		System.out.println(" ");
 	}
-	//Méthode pour afficher le pannier
+	/**seePannier
+	 * @param pannier permet de voir le pannier
+	 * **/
 	public static void seePannier() {
 		if (total ()>0) {
 		System.out.println(" Voici votre pannier "+name+" : ");
@@ -73,14 +84,16 @@ public class Formation {
 		System.out.println("-----|---------------|----------|--------------------------------------|-------|----------|----------|");
 		System.out.printf("%5s|%-14s | %-8s | %-36s |%-5s %-11s %11s|\n"," "," ", " ", "                             ","","    TOTAL :",  total ());
 		System.out.println("------------------------------------------------------------------------------------------------------");
-		System.out.println(" )n'importe quoi");
+		System.out.println("");
 		}else {
 			System.out.println(" Votre pannier est vide "+ name);
 			System.out.println(" ");
 		}
 	}
 
-	//Méthode pour afficher le pannier
+	/**seeBuy
+	 * permet de voir le panier avant validation du pannier
+	 * **/
 	public static void seeBuy() {
 		System.out.println("                           Voici votre pannier "+name+" :");
 		System.out.println("------------------------------------------------------------------------------------------------------");
@@ -96,7 +109,9 @@ public class Formation {
 		
 	}
 	
-	//Méthode pour créer le tableau des différentes formations
+	/**listeFormations
+	 *permet de créer le tableau des formations
+	 * **/
 	private static void listeFormations() {
 	formation.put(1,new ArrayList<String>());
 	formation.get(1).add("Java"); formation.get(1).add("20");formation.get(1).add("Java SE 8 : Syntaxe & Poo");formation.get(1).add("3000");formation.get(1).add("1");formation.get(1).add("0");
@@ -110,7 +125,9 @@ public class Formation {
 	formation.get(5).add("C#"); formation.get(5).add("20");formation.get(5).add("DotNet Core");formation.get(5).add("5000");formation.get(5).add("1");formation.get(5).add("0");
 	}
 	
-	/////Méthode pour créer le tableau des futur formations////
+	/**futurListeFormations
+	 * permet de créer le tableau des futures formations
+	 * **/
 	private static void futurListeFormations() {
 	futurFormation.put(1,new ArrayList<String>());
 	futurFormation.get(1).add("htlm"); futurFormation.get(1).add("10");futurFormation.get(1).add("Syntaxe ");futurFormation.get(1).add("1500");futurFormation.get(1).add("1");futurFormation.get(1).add("0");
@@ -124,7 +141,9 @@ public class Formation {
 	futurFormation.get(5).add("VSCode"); futurFormation.get(5).add("10");futurFormation.get(5).add("Utilisation");futurFormation.get(5).add("1500");futurFormation.get(5).add("1");futurFormation.get(5).add("0");
 	}
 	
-	///////méthode pour faire le total à payer/////
+	/**total
+	 * méthode de calcul du total final
+	 * **/
 	public static int total () {
 		sum = 0 ;
 		pannier.entrySet()
@@ -134,10 +153,11 @@ public class Formation {
 		}
 
 
-	/////////méthode pour afficher le menu du pannier///////
+	/**creatPannier
+	 * affichage du menu
+	 * **/
 	public static void creatPannier() {
 		int choice = 0;
-		System.out.println("Voulez vous acheter une formation :\n");
 		System.out.println("Faites votre choix dans le menu, saisissez le chiffre correspondant :\n");
 		while(choice != 6) {
 			System.out.println("1 : Afficher la liste des formations");
@@ -169,7 +189,6 @@ public class Formation {
 						System.out.println("saisissez l'id de la formation");
 						int idForma = scan.nextInt();		
 						if(formation.get(idForma)!= null) {
-							//est-ce que la formation n'est pas ans mon panier
 							if(pannier.get(idForma)== null ) {
 								//rajouter une formation
 								pannier.put(idForma, formation.get(idForma));
@@ -177,7 +196,6 @@ public class Formation {
 							else {
 								//incrémenter la valeur de qté
 								int qte = Integer.parseInt(pannier.get(idForma).get(4));
-								//System.out.println("-----" + qte);
 								++qte;	
 								pannier.get(idForma).set(4, String.valueOf(qte));
 							}
@@ -196,7 +214,7 @@ public class Formation {
 						System.out.println("Saisissez l'id de la formation que vous voulez supprimer : " );
 						int idDell= scan.nextInt();		
 						if(formation.get(idDell)!= null) {
-							
+							// Permet de supprimer la quantité 
 							int qte = Integer.parseInt(pannier.get(idDell).get(4));
 								--qte;		
 								pannier.get(idDell).set(4, String.valueOf(qte));
@@ -211,7 +229,7 @@ public class Formation {
 							System.out.println(" ");
 						break;
 						
-						//Validation du panier et remise à 0 du panier
+						//Validation du panier et remise à 0 du panier et affichage des futures formation
 						case 5 :
 						if (total ()>0) {
 							System.out.println("");
